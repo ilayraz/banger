@@ -27,7 +27,7 @@ specifiers:
   file-saver: ^2.0.5
   gridjs: ^5.1.0
   gridjs-react: ^5.1.0
-  husky: ^8.0.2
+  husky: ^8.0.0
   lint-staged: ^13.1.0
   mkdirp: ^1.0.4
   ms: ^2.1.3

@@ -169,14 +169,18 @@ export default abstract class Backend<T> {
         const siteFormat = await this.bangConfig.siteFormat.getValue();
         const customBangs = await this.bangConfig.customBangs.getValue();
         const getBang = (shortcut: string): CustomBang | Bang | undefined => {
+            const [siteShortcut, subDomainShortcut] = shortcut.split('/');
             const customBang = customBangs.find(
-                bang => bang.shortcut === shortcut,
+                bang => bang.shortcut === siteShortcut,
             );
             if (customBang) {
                 if (customBang.url) {
                     return {
                         ...customBang,
-                        url: customBang.url.replace('%q', this.bangReplacement),
+                        url: customBang.url.replace(
+                            '%q',
+                            subDomainShortcut ?? this.bangReplacement,
+                        ),
                     };
                 }
 
@@ -194,7 +198,19 @@ export default abstract class Backend<T> {
         const getSiteQuery = (siteShortcut: string): string | undefined => {
             const domains = siteShortcut
                 .split(multiSiteDelim)
-                .map(shortcut => shortcut !== '' && getBang(shortcut)?.domain)
+                .map(shortcut => {
+                    if (shortcut === '') {
+                        return false;
+                    }
+
+                    const bang = getBang(shortcut);
+
+                    if (siteShortcut.includes('/')) {
+                        return bang?.url ?? bang?.domain;
+                    }
+
+                    return bang?.domain;
+                })
                 .filter(Boolean) as string[];
 
             if (domains.length === 0) {

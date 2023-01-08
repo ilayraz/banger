@@ -10,11 +10,6 @@
     "background": {
         "page": "pages/background.html"
     },
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "{72e040d8-c3e5-4750-94d4-45b9b2489d19}"
-        }
-    },
     "permissions": [
         "browserSettings",
         "search",

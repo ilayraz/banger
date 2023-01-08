@@ -1,6 +1,8 @@
 # Banger
 ![Banger icon](static/icons/icon.svg)
 
+Adds ability to query subreddits directly with site bangs
+
 A Firefox extension that adds DuckDuckGo-like !Bangs to any search engine.
 
 Install this extension at https://addons.mozilla.org/en-US/firefox/addon/banger/
